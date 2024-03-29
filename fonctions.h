@@ -5,15 +5,15 @@
 #ifndef PROJET_C_FONCTIONS_H
 #define PROJET_C_FONCTIONS_H
 
-
 typedef struct
 {
-    char Title [50];
+    char *Title;
     int Taille_Physique ;
     int Taille_Logique ;
-    int Data [REALOC_SIZE];
+    int *Data;
 }COLUMN;
 
+COLUMN *creat_column(char* title);
 
 
 #endif //PROJET_C_FONCTIONS_H
