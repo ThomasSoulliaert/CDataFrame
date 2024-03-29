@@ -4,6 +4,9 @@
 
 #ifndef PROJET_C_FONCTIONS_H
 #define PROJET_C_FONCTIONS_H
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct
 {
