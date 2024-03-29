@@ -8,15 +8,6 @@
 
 int main()
 {
-    typedef struct
-    {
-        char Titre[100];
-        int Taille_physique;
-        int Taille_logique;
-        int Data[REALOC_SIZE];
-    }column;
-
     printf("Hello world\n");
-    printf("Test OK");
     return 0;
 }
