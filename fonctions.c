@@ -122,7 +122,6 @@ int egale(COLUMN *colonne, int x)
 
 /// Partie : Alimentation
 
-/// Avec COLUMN**, nous créons un pointeur qui peut contenir l'adresse du premier élément d'un tableau de pointeurs vers des structures COLUMN.
 /// Fonction qui gère dynamiquement le nombre de colonnes que nous souhaitons manipuler dans le programme.
 COLUMN** creat_DATAFRAME(int taille)
 {
@@ -214,7 +213,7 @@ void del_DataFrameLine(COLUMN** DataFrame, int nombreColonne)
     scanf("%d\n", &colonne);
     printf("Ligne = ");
     scanf("%d",&ligne);
-    if ((colonne < nombreColonne) && (DataFrame[colonne]->Data[ligne]!=0))
+    if ((colonne < nombreColonne) && (DataFrame[colonne]->Data[ligne] != 0))
     {
         for (int j = ligne; j < DataFrame[colonne]->TL - 1; j++)
         {
@@ -230,88 +229,95 @@ void del_DataFrameLine(COLUMN** DataFrame, int nombreColonne)
 /// Fonction qui rajoute une colonne dans le DataFrame.
 void add_DataFrameColumn(COLUMN** DataFrame, int *nombreColonne) /// Passage par un pointeur pour *nbcol pour pouvoir enregistrer le changement
 {
-    char* titre[100];
-    int taille,valeur;
+    char *titre[100];
+    int taille, valeur;
     printf("Quel nom voulez-vous donner à votre nouvelle colonne ?");
     scanf("%s", titre);
-    DataFrame[*nombreColonne] = create_column(titre);///on crée la nouvelle colonne
-    printf("Combien de Valeur dans cette colonne ? ");
+    DataFrame[*nombreColonne] = create_column(titre); /// Création d'une nouvelle colonne.
+    printf("Combien de valeurs souhaitez-vous ajouter dans cette nouvelle colonne ?\n");
     scanf("%d", &taille);
     for (int j = 0; j < taille; j++)
     {
-        printf("Entrez la %d valeur\n", j);
+        printf("Entrez la valeur à l'indice %d\n", j);
         scanf("%d", &valeur);
         insert_value(DataFrame[*nombreColonne], valeur);
     }
-    (*nombreColonne)++;///on met à jour le nombre de colonne
+    (*nombreColonne)++; ///Mise à jour du nombre de colonnes.
 }
 
+/// Fonction qui supprime une colonne du DataFrame.
 void del_DataFrameColumn(COLUMN** DataFrame,int *nombreColonne)
 {
-    int col;
+    int colonne;
     printf("Quelle colonne voulez-vous supprimer ?\n ");
-    scanf(" %d",&col);
-    if (col< *nombreColonne)
+    scanf(" %d", &colonne);
+    if (colonne < *nombreColonne)
     {
-        delete_column(&DataFrame[col]);///supprimer la colonne à l'index voulut
-        for (int i=col ;i+1 < *nombreColonne; i++)
-            DataFrame[i+1]=DataFrame[i];///on déplace les indices vers la gauche
-        (*nombreColonne)--;///on met à jour le nombre de colonnes
+        delete_column(&DataFrame[colonne]); /// Suppression de la colonne à l'indice souhaité.
+        for (int i = colonne; i + 1 < *nombreColonne; i++)
+            DataFrame[i+1] = DataFrame[i]; /// Déplacement des indices vers la gauche.
+        (*nombreColonne)--; /// Mise à jour du nombre de colonnes.
     }
 
     else
-        printf("Erreur avec les valeurs choisies \n");
+        printf("Erreur, les valeurs choisies ne permettent pas de réaliser l'opération souhaitée.\n");
 }
 
-/// Fonction qui renomme une colonne.
+/// Fonction qui renomme une colonne du DataFrame.
 void rename_Column(COLUMN** DataFrame, int *nombreColonne)
 {
     char titre[100];
     int colonne;
-    printf("Quel colonne souhaitez vous renommer ? \n");
+    printf("Quelle colonne souhaitez-vous renommer ?\n");
     scanf("%d",&colonne);
     if (colonne < *nombreColonne)
     {
-        printf("Rentrez le nouveau titre \n");
+        printf("Ecrivez le nouveau titre pour la colonne choisie :\n");
         scanf("%s",titre);
-        strcpy(DataFrame[colonne]->Title, titre); // Copie la nouvelle chaîne dans le champ Title
+        strcpy(DataFrame[colonne]->Title, titre); /// Copie la nouvelle chaîne dans le champ Title.
     }
 }
 
-int Research_Value(COLUMN** DataFrame,int nombreColonne,int x)
+/// Fonction qui recherche une valeur dans le DataFrame.
+int Research_Value(COLUMN** DataFrame, int nombreColonne, int x)
 {
-    for (int i=0;i<nombreColonne;i++)
+    for (int i = 0; i < nombreColonne; i++) /// Pour chaque colonne...
     {
-        for (int j=0 ; j<DataFrame[i]->TL; j++)///regarde toutes les lignes
+        for (int j = 0 ; j < DataFrame[i]->TL; j++) /// ...puis pour chaque ligne...
         {
-            if (DataFrame[i]->Data[j]==x)
-                return 1;///la valeure x a été trouvé
+            if (DataFrame[i]->Data[j] == x) /// ...on regarde si la valeur X est trouvée.
+                return 1; /// Valeur X trouvée : la fonction renvoie 1.
         }
     }
-    return 0; ///la valeure x n'a pas été trouvé
+    return 0; /// Valeur X non-trouvée : la fonction renvoie 0.
 }
 
-void ReplaceValue(COLUMN** DataFrame,int nombreColonne)
+/// Fonction qui remplace une valeur dans le DataFrame.
+void ReplaceValue(COLUMN** DataFrame, int nombreColonne)
 {
-    int col,ligne,value;
-    printf("Quelle colonne ?\n");
-    scanf("%d",&col);
-    printf("Quelle ligne ?\n");
+    int colonne, ligne, valeur;
+    printf("Donnez l'emplacement de la valeur que vous souhaitez remplacer :\n");
+    printf("Quelle est la colonne de cette valeur ?\n");
+    scanf("%d",&colonne);
+    printf("Quelle est la ligne de cette valeur ?\n");
     scanf("%d",&ligne);
-    printf("Nouvelle valeur ?\n");
-    scanf("%d",&value);
-    if (col<nombreColonne && ligne<DataFrame[col]->TL) {
-        DataFrame[col]->Data[ligne] = value;
+    printf("Ecrivez la nouvelle valeur ?\n");
+    scanf("%d",&valeur);
+    if ((colonne < nombreColonne) && (ligne < DataFrame[colonne]->TL))
+    {
+        DataFrame[colonne]->Data[ligne] = valeur;
     }
     else {
-        printf("Erreur avec les valeurs choisies !\n");
+        printf("Erreur, les valeurs choisies ne permettent pas de réaliser l'opération souhaitée.\n");
     }
 }
 
-void printName(COLUMN** DataFrame,int nombreColonne)
+/// Fonction qui affiche le titre de la colonne souahitée.
+void printName(COLUMN** DataFrame, int nombreColonne)
 {
-    for (int i=0;i<nombreColonne;i++){
-        printf("colonne numéro %d = %s \n",i,DataFrame[i]->Title);
+    for (int i = 0; i < nombreColonne; i++)
+    {
+        printf("Le titre de la colonne numéro %d est %s \n", i, DataFrame[i]->Title);
     }
 }
 
