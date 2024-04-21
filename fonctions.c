@@ -20,101 +20,101 @@ COLUMN *create_column(char* title)
     return col;
 }
 
-/// Fonction qui une valeur dans la colonne sélectionnée.
-int insert_value(COLUMN* col, int value)
+/// Fonction qui insert une valeur dans la colonne sélectionnée.
+int insert_value(COLUMN *colonne, int value)
 {
-    if (col->TP == 0)
+    if (colonne->TP == 0)
     {
-        col->Data = (int*)malloc(REALOC_SIZE * sizeof(int));
-        col->Data[col->TL] = value;
-        col->TL++;
-        col->TP = REALOC_SIZE;
+        colonne->Data = (int*)malloc(REALOC_SIZE * sizeof(int));
+        colonne->Data[colonne->TL] = value;
+        colonne->TL++;
+        colonne->TP = REALOC_SIZE;
         return 1;
     }
-    else if(col->TL == col->TP) /// Si Taille logique = Taille physique : REALOC pour augmenter l'espace.
+    else if(colonne->TL == colonne->TP) /// Si Taille logique = Taille physique : REALOC pour augmenter l'espace.
     {
-        col->Data= (int*)realloc(col->Data,(col->TP + REALOC_SIZE) * sizeof (int));
-        col->Data[col->TL] = value;
-        col->TL++;
-        col->TP += REALOC_SIZE;
+        colonne->Data= (int*)realloc(colonne->Data, (colonne->TP + REALOC_SIZE) * sizeof (int));
+        colonne->Data[colonne->TL] = value;
+        colonne->TL++;
+        colonne->TP += REALOC_SIZE;
         return 1;
     }
     else
     {
-        col->Data[col->TL] = value;
-        col->TL++;
+        colonne->Data[colonne->TL] = value;
+        colonne->TL++;
         return 1;
     }
     return 0;
 }
 
 /// Fonction qui prend en paramètre une colonne et qui permet de libérer la mémoire qui a été allouée à la colonne et à son tableau de données.
-void delete_column(COLUMN **col)
+void delete_column(COLUMN **colonne)
 {
-    free((*col)->Data);
-    free((*col)->Title);
-    free((*col));
-    *col = NULL;
+    free((*colonne)->Data);
+    free((*colonne)->Title);
+    free((*colonne));
+    *colonne = NULL;
 }
 
 /// Fonction qui affiche une colonne en paramètres.
-void print_col(COLUMN* col)
+void print_col(COLUMN *colonne)
 {
-    for (int i=0;i<col->TL;i++)
+    for (int i = 0; i < colonne->TL; i++)
     {
-        printf("[%d] %d\n", i, col->Data[i]);
+        printf("[%d] %d\n", i, colonne->Data[i]);
     }
 }
 
 /// Fonction qui renvoie le nombre d’occurrences d’une valeur X.
-int occurence(COLUMN* col, int x)
+int occurrence(COLUMN *colonne, int x)
 {
     int occurence = 0;
-    for (int i = 0; i < col->TL; i++)
+    for (int i = 0; i < colonne->TL; i++)
     {
-        if (col->Data[i] == x)
+        if (colonne->Data[i] == x)
             occurence++;
     }
     return occurence;
 }
 
 /// Fonction qui renvoie la valeur présente à la position X.
-int position(COLUMN *col, int x)
+int position(COLUMN *colonne, int x)
 {
-    return col->Data[x];
+    return colonne->Data[x];
 }
 
 /// Fonction qui renvoie le nombre de valeurs supérieures à X.
-int superieur(COLUMN *col, int x)
+int superieur(COLUMN *colonne, int x)
 {
     int total = 0;
-    for (int i = 0; i < col->TL; i++)
+    for (int i = 0; i < colonne->TL; i++)
     {
-        if (col->Data[i] > x)
+        if (colonne->Data[i] > x)
             total++;
     }
     return total;
 }
 
 /// Fonction qui renvoie le nombre de valeurs inférieures à X.
-int inferieur(COLUMN *col, int x)
+int inferieur(COLUMN *colonne, int x)
 {
     int total = 0;
-    for (int i = 0; i < col->TL; i++)
+    for (int i = 0; i < colonne->TL; i++)
     {
-        if (col->Data[i] < x)
+        if (colonne->Data[i] < x)
             total++;
     }
     return total;
 }
 
 ///Fonction qui renvoie le nombre de valeurs égales à X.
-int egale(COLUMN *col, int x)
+int egale(COLUMN *colonne, int x)
 {
     int total = 0;
-    for (int i = 0; i < col->TL; i++)
+    for (int i = 0; i < colonne->TL; i++)
     {
-        if (col->Data[i] == x)
+        if (colonne->Data[i] == x)
             total++;
     }
     return total;
@@ -130,19 +130,19 @@ COLUMN** creat_DATAFRAME(int taille)
     return DataFrame;
 }
 
-/// Fonction qui demande à l'utilisateur du programme de remplir le DataFrame
-void fill_DataFrame(COLUMN** DataFrame, int nombreCol)
+/// Fonction qui demande à l'utilisateur du programme de remplir le DataFrame.
+void fill_DataFrame(COLUMN** DataFrame, int nombreColonne)
 {
     char titre[100];
     int taille, valeur;
     /// Création du nombre de colonnes à partir de nombreCol.
-    for (int i = 0; i < nombreCol; i++)
+    for (int i = 0; i < nombreColonne; i++)
     {
         printf("Entrer le titre de la colone numéro %d\n", i);
         scanf("%s", titre);
         DataFrame[i] = create_column(titre);
         /// Remplissage de chaque colonne avec le nombre de valeurs souhaitées.
-        printf("Combien de Valeur dans cette colonne ? ");
+        printf("Combien de valeurs souhaitez-vous insérer dans cette colonne ?\n");
         scanf("%d", &taille);
         for (int j = 0; j < taille; j++) {
             printf("Entrez la %d valeur\n", j);
@@ -155,9 +155,9 @@ void fill_DataFrame(COLUMN** DataFrame, int nombreCol)
 /// Partie : Affichage
 
 /// Fonction qui affiche l'ensemble du DataFrame.
-void print_DataFrame(COLUMN** DataFrame, int nombreCol)
+void print_DataFrame(COLUMN** DataFrame, int nombreColonne)
 {
-    for(int i = 0; i < nombreCol; i++) /// Pour chaque colonne du DataFrame...
+    for(int i = 0; i < nombreColonne; i++) /// Pour chaque colonne du DataFrame...
     {
         printf("%de colonne :\n", i + 1);
         print_col(DataFrame[i]); /// ...on affiche chaque ligne de chaque colonne.
@@ -165,9 +165,9 @@ void print_DataFrame(COLUMN** DataFrame, int nombreCol)
 }
 
 /// Fonction qui affiche l'ensemble du DataFrame jusqu'à une certaine limite.
-void print_DataFrameLimitLigne(COLUMN** DataFrame, int nombreCol, int LigneLimite)
+void print_DataFrameLimitLine(COLUMN** DataFrame, int nombreColonne, int LigneLimite)
 {
-    for(int i = 0; i < nombreCol; i++) /// Pour chaque colonne du DataFrame...
+    for(int i = 0; i < nombreColonne; i++) /// Pour chaque colonne du DataFrame...
     {
         printf("%de colonne :\n", i + 1);
         for (int j = 0; j < LigneLimite; j++) /// ...on réalise une boucle où on va afficher l'ensemble des lignes, exceptées celles situées après la limite fixée par l'utilisateur.
@@ -176,9 +176,9 @@ void print_DataFrameLimitLigne(COLUMN** DataFrame, int nombreCol, int LigneLimit
 }
 
 /// Fonction qui affiche l'ensemble du DataFrame jusqu'à une certaine limite.
-void print_DataFrameLimitCol(COLUMN** DataFrame, int nombreCol, int ColonneLimite)
+void print_DataFrameLimitColumn(COLUMN** DataFrame, int nombreColonne, int ColonneLimite)
 {
-    for(int i = 0; (i < nombreCol) && (i < ColonneLimite); i++) /// Pour chaque colonne du DataFrame (si colonne < ColonneLimite)...
+    for(int i = 0; (i < nombreColonne) && (i < ColonneLimite); i++) /// Pour chaque colonne du DataFrame (si colonne < ColonneLimite)...
     {
         printf("%de colonne :\n", i + 1);
         print_col(DataFrame[i]); /// ...on affiche chaque ligne de chaque colonne.
@@ -318,7 +318,8 @@ void printName(COLUMN** DataFrame,int nombreColonne)
 /// Partie : Analyses & Statistiques
 
 /// Fonction
-int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nombreColonne){
+int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nombreColonne)
+{
     int nombre_lig=0;
     for (int i=0;i<nombreColonne;i++) /// On parcourt tout le Dataframe en prenant en compte le nb de col
     {
@@ -327,12 +328,14 @@ int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nombreColonne){
     return(nombre_lig);
 }
 
-int Nbr_colonnes_DataFrame(COLUMN** DataFrame){
+int Nbr_colonnes_DataFrame(COLUMN** DataFrame)
+{
     return(sizeof(DataFrame)/sizeof(int)); /// On récupère la taille de cette manirère, sizeof donne la taille de données mémoire, mais si on la divise par la taille de la donnée (ici un int en l'occurence, on a la taille du tableau
 }
 
 
-int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
+int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne)
+{
     int i,j,nombre_val=0;
     for(i=0;i<nombreColonne;i++){
         for(j=0;j<DataFrame[i]->TL;j++){
@@ -343,7 +346,8 @@ int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
     return(nombre_val);
 }
 
-int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
+int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne)
+{
     int i,j,nombre_val=0;
     for(i=0;i<nombreColonne;i++){
         for(j=0;j<DataFrame[i]->TL;j++){
@@ -354,7 +358,8 @@ int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
     return(nombre_val);
 }
 
-int Nbr_val_inf_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
+int Nbr_val_inf_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne)
+{
     int i,j,nombre_val=0;
     for(i=0;i<nombreColonne;i++)
     {

@@ -21,15 +21,15 @@ typedef struct
 }COLUMN; /// Nouveau type de structure : type "COLUMN"
 
 /// Partie : Fonctions de base
-COLUMN *create_column(char* title);
-int insert_value(COLUMN* col, int value);
-void delete_column(COLUMN **col);
-void print_col(COLUMN* col);
-int occurence(COLUMN* col,int x);
-int position(COLUMN* col, int x);
-int superieur(COLUMN *col, int x);
-int inferieur(COLUMN *col, int x);
-int egale(COLUMN *col, int x);
+COLUMN *create_column(char *title);
+int insert_value(COLUMN *colonne, int value);
+void delete_column(COLUMN **colonne);
+void print_col(COLUMN *colonne);
+int occurrence(COLUMN *colonne,int x);
+int position(COLUMN *colonne, int x);
+int superieur(COLUMN *colonne, int x);
+int inferieur(COLUMN *colonne, int x);
+int egale(COLUMN *colonne, int x);
 
 /// Partie : Alimentation
 COLUMN** creat_DATAFRAME(int taille);
