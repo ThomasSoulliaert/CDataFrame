@@ -21,8 +21,8 @@ typedef struct
 }COLUMN; /// Nouveau type de structure : type "COLUMN"
 
 /// Partie : Fonctions de base
-COLUMN *create_column(char *title);
-int insert_value(COLUMN *colonne, int value);
+COLUMN *create_column(char *titre);
+int insert_value(COLUMN *colonne, int valeur);
 void delete_column(COLUMN **colonne);
 void print_col(COLUMN *colonne);
 int occurrence(COLUMN *colonne,int x);
@@ -51,11 +51,11 @@ void ReplaceValue(COLUMN** DataFrame, int nombreColonne);
 void printName(COLUMN** DataFrame, int nombreColonne);
 
 /// Partie : Analyses & Statistiques
-int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nb_col);
-int Nbr_colonnes_DataFrame(COLUMN** DataFrame);
-int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nb_col);
-int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nb_col);
-int Nbr_val_inf_DataFrame(COLUMN** DataFrame, int valeur, int nb_col);
+int numberLines_DataFrame(COLUMN** DataFrame, int nombreColonne);
+int numberColumns_DataFrame(COLUMN** DataFrame);
+int numberValues_Equal_DataFrame(COLUMN** DataFrame, int x, int nombreColonne);
+int numberValues_Sup_DataFrame(COLUMN** DataFrame, int x, int nombreColonne);
+int numberValues_Inf_DataFrame(COLUMN** DataFrame, int x, int nombreColonne);
 
 
 #endif //PROJET_C_FONCTIONS_H
