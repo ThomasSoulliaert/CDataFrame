@@ -145,7 +145,7 @@ void fill_DataFrame(COLUMN** DataFrame, int nombreColonne)
         printf("Combien de valeurs souhaitez-vous insérer dans cette colonne ?\n");
         scanf("%d", &taille);
         for (int j = 0; j < taille; j++) {
-            printf("Entrez la %d valeur\n", j);
+            printf("Entrez la valeur à l'indice %d\n", j);
             scanf("%d", &valeur);
             insert_value(DataFrame[i], valeur);
         }
