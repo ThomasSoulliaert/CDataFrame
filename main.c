@@ -24,9 +24,9 @@ int main()
 
     COLUMN *mycol = create_column("My column");
     COLUMN** DataFrame;
-    int nombreCol = 1, valeur = 3;
+    int nombreCol = 2;
+    int valeur = 3;
     DataFrame = creat_DATAFRAME(3);
     fill_DataFrame(DataFrame, nombreCol);
-    Nbr_val_egale_DataFrame(DataFrame, valeur, nombreCol);
     return 0;
 }

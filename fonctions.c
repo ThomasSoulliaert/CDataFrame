@@ -31,7 +31,7 @@ int insert_value(COLUMN *colonne, int valeur)
         colonne->TP = REALOC_SIZE;
         return 1;
     }
-    else if(colonne->TL == colonne->TP) /// Si Taille logique = Taille physique : REALOC pour augmenter l'espace.
+    else if (colonne->TL == colonne->TP) /// Si Taille logique = Taille physique : REALOC pour augmenter l'espace.
     {
         colonne->Data = (int*)realloc(colonne->Data, (colonne->TP + REALOC_SIZE) * sizeof (int));
         colonne->Data[colonne->TL] = valeur;
