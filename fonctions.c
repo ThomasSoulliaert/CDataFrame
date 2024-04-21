@@ -6,6 +6,8 @@
 #include "fonctions.h"
 
 
+/// Partie : Fonctions de base
+
 /// Fonction qui créé dynamiquement une colonne vide à partir d’un titre.
 COLUMN *create_column(char* title)
 {
@@ -52,7 +54,7 @@ void delete_column(COLUMN **col)
     free((*col)->Data);
     free((*col)->Title);
     free((*col));
-    *col=NULL;
+    *col = NULL;
 }
 
 /// Fonction qui affiche une colonne en paramètres.
@@ -150,7 +152,8 @@ void fill_DataFrame(COLUMN** DataFrame, int nombreCol)
     }
 }
 
-/// Affichage
+/// Partie : Affichage
+
 /// Fonction qui affiche l'ensemble du DataFrame.
 void print_DataFrame(COLUMN** DataFrame, int nombreCol)
 {
@@ -221,10 +224,11 @@ void del_DataFrameLigne(COLUMN** DataFrame, int nombreCol)
         printf("La ligne %d de la colonne %d a été supprimée avec succès.\n", ligne, colonne);
     }
     else
-        printf("Erreur avec les valeurs choisies \n");
+        printf("Erreur, les valeurs choisies ne permettent pas de réaliser l'opération souhaitée.\n");
 }
 
-void add_DataFrameCol(COLUMN** DataFrame,int *nbcol)///on passe par un pointeur pour *nbcol pour pouvoir enregistrer le changement
+/// Fonction qui rajoute une colonne dans le DataFrame.
+void add_DataFrameColonne(COLUMN** DataFrame, int *nbcol) /// Passage par un pointeur pour *nbcol pour pouvoir enregistrer le changement
 {
     char* titre[50];
     int taille,valeur;
@@ -242,7 +246,7 @@ void add_DataFrameCol(COLUMN** DataFrame,int *nbcol)///on passe par un pointeur 
     (*nbcol)++;///on met à jour le nombre de colonne
 }
 
-void del_DataFrameCol(COLUMN** DataFrame,int* nbcol)
+void del_DataFrameColonne(COLUMN** DataFrame,int* nbcol)
 {
     int col;
     printf("Quelle colonne voulez-vous supprimer ?\n ");
@@ -259,7 +263,7 @@ void del_DataFrameCol(COLUMN** DataFrame,int* nbcol)
         printf("Erreur avec les valeurs choisies \n");
 }
 
-void rename_Col(COLUMN** DataFrame,int* nbcol)
+void rename_Colonne(COLUMN** DataFrame,int* nbcol)
 {
     char titre[50];
     int col;
@@ -310,21 +314,9 @@ void printName(COLUMN** DataFrame,int nbcol)
     }
 }
 
-/*
-        d8888                   888                                                   888                  888             888    d8b          888    d8b
-      d88888                   888                                                   888                  888             888    Y8P          888    Y8P
-     d88P888                   888                                                   888                  888             888                 888
-    d88P 888 88888b.   8888b.  888 888  888 .d8888b   .d88b.  .d8888b        .d88b.  888888      .d8888b  888888  8888b.  888888 888 .d8888b  888888 888  .d88888 888  888  .d88b.  .d8888b
-   d88P  888 888 "88b     "88b 888 888  888 88K      d8P  Y8b 88K           d8P  Y8b 888         88K      888        "88b 888    888 88K      888    888 d88" 888 888  888 d8P  Y8b 88K
-  d88P   888 888  888 .d888888 888 888  888 "Y8888b. 88888888 "Y8888b.      88888888 888         "Y8888b. 888    .d888888 888    888 "Y8888b. 888    888 888  888 888  888 88888888 "Y8888b.
- d8888888888 888  888 888  888 888 Y88b 888      X88 Y8b.          X88      Y8b.     Y88b.            X88 Y88b.  888  888 Y88b.  888      X88 Y88b.  888 Y88b 888 Y88b 888 Y8b.          X88
-d88P     888 888  888 "Y888888 888  "Y88888  88888P'  "Y8888   88888P'       "Y8888   "Y888       88888P'  "Y888 "Y888888  "Y888 888  88888P'  "Y888 888  "Y88888  "Y88888  "Y8888   88888P'
-                                        888                                                                                                                   888
-                                   Y8b d88P                                                                                                                   888
-                                    "Y88P"                                                                                                                    888
- */
+/// Partie : Analyses & Statistiques
 
-
+/// Fonction
 int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nb_col){
     int nombre_lig=0;
     for (int i=0;i<nb_col;i++) /// On parcourt tout le Dataframe en prenant en compte le nb de col
