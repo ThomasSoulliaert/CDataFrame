@@ -1,4 +1,10 @@
 # ninja log v5
 0	79	7334103216394601	CMakeFiles/Projet_C.dir/main.c.obj	ec78d7da50b0fc7e
 79	201	7334103217525091	Projet_C.exe	6944f96387de1b74
-11	126	7334143551570603	CMakeFiles/Projet_C.dir/fonctions.c.obj	768af093f29c016c
+10	102	7334149197177932	CMakeFiles/Projet_C.dir/fonctions.c.obj	768af093f29c016c
+2	147	7354103917754268	CMakeFiles/Projet_C.dir/main.c.obj	ace3fc5d3bba0985
+17	185	7354103918135806	CMakeFiles/Projet_C.dir/fonctions.c.obj	90029626ba3f621f
+185	602	7354103919872196	Projet_C.exe	ed659189fd155b34
+14	181	7354137335537502	CMakeFiles/Projet_C.dir/main.c.obj	ace3fc5d3bba0985
+2	201	7354137335737485	CMakeFiles/Projet_C.dir/fonctions.c.obj	90029626ba3f621f
+201	423	7354137337192750	Projet_C.exe	ed659189fd155b34
