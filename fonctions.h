@@ -33,22 +33,22 @@ int egale(COLUMN *col, int x);
 
 /// Partie : Alimentation
 COLUMN** creat_DATAFRAME(int taille);
-void fill_DataFrame(COLUMN** DataFrame, int nombreCol);
+void fill_DataFrame(COLUMN** DataFrame, int nombreColonne);
 
 /// Partie : Affichage
-void print_DataFrame(COLUMN** DataFrame, int nombreCol);
-void print_DataFrameLimitLigne(COLUMN** DataFrame, int nombreCol, int LigneLimite);
-void print_DataFrameLimitCol(COLUMN** DataFrame, int nombreCol, int ColonneLimite);
+void print_DataFrame(COLUMN** DataFrame, int nombreColonne);
+void print_DataFrameLimitLine(COLUMN** DataFrame, int nombreColonne, int LigneLimite);
+void print_DataFrameLimitColumn(COLUMN** DataFrame, int nombreColonne, int ColonneLimite);
 
 /// Partie : Opérations
-void fill_DataFrameLigne(COLUMN** DataFrame, int nombreCol);
-void del_DataFrameLigne(COLUMN** DataFrame, int nombreCol);
-void add_DataFrameColonne(COLUMN** DataFrame, int *nbcol);
-void del_DataFrameColonne(COLUMN** DataFrame, int *nbcol);
-void rename_Colonne(COLUMN** DataFrame, int* nbCol);
-int Research_Value(COLUMN** DataFrame, int nbcol, int x);
-void ReplaceValue(COLUMN** DataFrame, int nbcol);
-void printName(COLUMN** DataFrame, int nbcol);
+void fill_DataFrameLine(COLUMN** DataFrame, int nombreColonne);
+void del_DataFrameLine(COLUMN** DataFrame, int nombreColonne);
+void add_DataFrameColumn(COLUMN** DataFrame, int *nombreColonne);
+void del_DataFrameColumn(COLUMN** DataFrame, int *nombreColonne);
+void rename_Column(COLUMN** DataFrame, int *nombreColonne);
+int Research_Value(COLUMN** DataFrame, int nombreColonne, int x);
+void ReplaceValue(COLUMN** DataFrame, int nombreColonne);
+void printName(COLUMN** DataFrame, int nombreColonne);
 
 /// Partie : Analyses & Statistiques
 int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nb_col);

@@ -188,12 +188,12 @@ void print_DataFrameLimitCol(COLUMN** DataFrame, int nombreCol, int ColonneLimit
 /// Partie : Opérations
 
 /// Fonction qui rajoute une ligne dans une colonne.
-void fill_DataFrameLigne(COLUMN** DataFrame, int nombreCol)
+void fill_DataFrameLine(COLUMN** DataFrame, int nombreColonne)
 {
     int col, i = 0, value;
     printf("Dans quelle colonne souhaitez-vous rajouter une ligne ?\n");
     scanf("%d", &col);
-    if (col <= nombreCol)
+    if (col <= nombreColonne)
     {
         printf("Quelle valeur souhaitez-vous rajouter ?\n");
         scanf("%d", &value);
@@ -207,14 +207,14 @@ void fill_DataFrameLigne(COLUMN** DataFrame, int nombreCol)
 }
 
 /// Fonction qui supprime une ligne dans une colonne.
-void del_DataFrameLigne(COLUMN** DataFrame, int nombreCol)
+void del_DataFrameLine(COLUMN** DataFrame, int nombreColonne)
 {
     int colonne, ligne;
     printf("Quelle ligne de quelle colonne souahitez-vous supprimer ?\nColonne = ");
     scanf("%d\n", &colonne);
     printf("Ligne = ");
     scanf("%d",&ligne);
-    if ((colonne < nombreCol) && (DataFrame[colonne]->Data[ligne]!=0))
+    if ((colonne < nombreColonne) && (DataFrame[colonne]->Data[ligne]!=0))
     {
         for (int j = ligne; j < DataFrame[colonne]->TL - 1; j++)
         {
@@ -228,58 +228,59 @@ void del_DataFrameLigne(COLUMN** DataFrame, int nombreCol)
 }
 
 /// Fonction qui rajoute une colonne dans le DataFrame.
-void add_DataFrameColonne(COLUMN** DataFrame, int *nbcol) /// Passage par un pointeur pour *nbcol pour pouvoir enregistrer le changement
+void add_DataFrameColumn(COLUMN** DataFrame, int *nombreColonne) /// Passage par un pointeur pour *nbcol pour pouvoir enregistrer le changement
 {
-    char* titre[50];
+    char* titre[100];
     int taille,valeur;
     printf("Quel nom voulez-vous donner à votre nouvelle colonne ?");
     scanf("%s", titre);
-    DataFrame[*nbcol] = create_column(titre);///on crée la nouvelle colonne
+    DataFrame[*nombreColonne] = create_column(titre);///on crée la nouvelle colonne
     printf("Combien de Valeur dans cette colonne ? ");
     scanf("%d", &taille);
     for (int j = 0; j < taille; j++)
     {
         printf("Entrez la %d valeur\n", j);
         scanf("%d", &valeur);
-        insert_value(DataFrame[*nbcol], valeur);
+        insert_value(DataFrame[*nombreColonne], valeur);
     }
-    (*nbcol)++;///on met à jour le nombre de colonne
+    (*nombreColonne)++;///on met à jour le nombre de colonne
 }
 
-void del_DataFrameColonne(COLUMN** DataFrame,int* nbcol)
+void del_DataFrameColumn(COLUMN** DataFrame,int *nombreColonne)
 {
     int col;
     printf("Quelle colonne voulez-vous supprimer ?\n ");
     scanf(" %d",&col);
-    if (col< *nbcol)
+    if (col< *nombreColonne)
     {
         delete_column(&DataFrame[col]);///supprimer la colonne à l'index voulut
-        for (int i=col ;i+1 < *nbcol; i++)
+        for (int i=col ;i+1 < *nombreColonne; i++)
             DataFrame[i+1]=DataFrame[i];///on déplace les indices vers la gauche
-        (*nbcol)--;///on met à jour le nombre de colonnes
+        (*nombreColonne)--;///on met à jour le nombre de colonnes
     }
 
     else
         printf("Erreur avec les valeurs choisies \n");
 }
 
-void rename_Colonne(COLUMN** DataFrame,int* nbcol)
+/// Fonction qui renomme une colonne.
+void rename_Column(COLUMN** DataFrame, int *nombreColonne)
 {
-    char titre[50];
-    int col;
+    char titre[100];
+    int colonne;
     printf("Quel colonne souhaitez vous renommer ? \n");
-    scanf("%d",&col);
-    if (col<*nbcol)
+    scanf("%d",&colonne);
+    if (colonne < *nombreColonne)
     {
         printf("Rentrez le nouveau titre \n");
         scanf("%s",titre);
-        strcpy(DataFrame[col]->Title, titre); // Copie la nouvelle chaîne dans le champ Title
+        strcpy(DataFrame[colonne]->Title, titre); // Copie la nouvelle chaîne dans le champ Title
     }
 }
 
-int Research_Value(COLUMN** DataFrame,int nbcol,int x)
+int Research_Value(COLUMN** DataFrame,int nombreColonne,int x)
 {
-    for (int i=0;i<nbcol;i++)
+    for (int i=0;i<nombreColonne;i++)
     {
         for (int j=0 ; j<DataFrame[i]->TL; j++)///regarde toutes les lignes
         {
@@ -287,10 +288,10 @@ int Research_Value(COLUMN** DataFrame,int nbcol,int x)
                 return 1;///la valeure x a été trouvé
         }
     }
-    return 0;///la valeure x n'a pas été trouvé
+    return 0; ///la valeure x n'a pas été trouvé
 }
 
-void ReplaceValue(COLUMN** DataFrame,int nbcol)
+void ReplaceValue(COLUMN** DataFrame,int nombreColonne)
 {
     int col,ligne,value;
     printf("Quelle colonne ?\n");
@@ -299,7 +300,7 @@ void ReplaceValue(COLUMN** DataFrame,int nbcol)
     scanf("%d",&ligne);
     printf("Nouvelle valeur ?\n");
     scanf("%d",&value);
-    if (col<nbcol && ligne<DataFrame[col]->TL) {
+    if (col<nombreColonne && ligne<DataFrame[col]->TL) {
         DataFrame[col]->Data[ligne] = value;
     }
     else {
@@ -307,9 +308,9 @@ void ReplaceValue(COLUMN** DataFrame,int nbcol)
     }
 }
 
-void printName(COLUMN** DataFrame,int nbcol)
+void printName(COLUMN** DataFrame,int nombreColonne)
 {
-    for (int i=0;i<nbcol;i++){
+    for (int i=0;i<nombreColonne;i++){
         printf("colonne numéro %d = %s \n",i,DataFrame[i]->Title);
     }
 }
@@ -317,9 +318,9 @@ void printName(COLUMN** DataFrame,int nbcol)
 /// Partie : Analyses & Statistiques
 
 /// Fonction
-int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nb_col){
+int Nbr_lignes_DataFrame(COLUMN** DataFrame, int nombreColonne){
     int nombre_lig=0;
-    for (int i=0;i<nb_col;i++) /// On parcourt tout le Dataframe en prenant en compte le nb de col
+    for (int i=0;i<nombreColonne;i++) /// On parcourt tout le Dataframe en prenant en compte le nb de col
     {
         nombre_lig=nombre_lig + DataFrame[i]->TL;
     }
@@ -331,9 +332,9 @@ int Nbr_colonnes_DataFrame(COLUMN** DataFrame){
 }
 
 
-int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nb_col){
+int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
     int i,j,nombre_val=0;
-    for(i=0;i<nb_col;i++){
+    for(i=0;i<nombreColonne;i++){
         for(j=0;j<DataFrame[i]->TL;j++){
             if(DataFrame[i]->Data[j] == valeur )
                 nombre_val++; /// Variable qui s'incrémente à chaques fois pour compter le nb de valeures égales à x
@@ -342,9 +343,9 @@ int Nbr_val_egale_DataFrame(COLUMN** DataFrame, int valeur, int nb_col){
     return(nombre_val);
 }
 
-int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nb_col){
+int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
     int i,j,nombre_val=0;
-    for(i=0;i<nb_col;i++){
+    for(i=0;i<nombreColonne;i++){
         for(j=0;j<DataFrame[i]->TL;j++){
             if(DataFrame[i]->Data[j] > valeur )
                 nombre_val++; /// Variable qui s'incrémente à chaques fois pour compter le nb de valeures égales à x
@@ -353,9 +354,9 @@ int Nbr_val_sup_DataFrame(COLUMN** DataFrame, int valeur, int nb_col){
     return(nombre_val);
 }
 
-int Nbr_val_inf_DataFrame(COLUMN** DataFrame, int valeur, int nb_col){
+int Nbr_val_inf_DataFrame(COLUMN** DataFrame, int valeur, int nombreColonne){
     int i,j,nombre_val=0;
-    for(i=0;i<nb_col;i++)
+    for(i=0;i<nombreColonne;i++)
     {
         for(j=0;j<DataFrame[i]->TL;j++)
         {
