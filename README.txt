@@ -1,18 +1,11 @@
-README Projet C
-# DataFrame
+# CDataFrame
 
+Date de rendu : 19/05/2024
 
-# Informations sur le groupe :
-Promo : 2028
-Année : L1
-Groupe : D
+Promo 2028, P1, Groupe D
 Binôme :
  - SOULLIAERT Thomas
  - YE Lucas
-
-
-Lien vers le dépot GitHub :
- - https://github.com/ThomasSoulliaert/Projet_C_SOULLIAERT_YE
 
 
 # Fichiers :
@@ -42,15 +35,18 @@ Partie I : Colonne
     int inferieur(COLUMN *colonne, int x) : Retourne le nombre de valeurs inférieures à une valeur donnée dans une colonne.
     int egale(COLUMN *colonne, int x) : Retourne le nombre de valeurs égales à une valeur donnée dans une colonne.
 
+
 Partie II : DataFrame
 2.1 : Alimentation
     COLUMN** creat_DATAFRAME(int taille) : Crée dynamiquement un tableau de colonnes de taille spécifiée.
     void fill_DataFrame(COLUMN** DataFrame, int nombreColonne) : Demande à l'utilisateur de remplir le DataFrame avec des titres de colonnes et des valeurs.
 
+
 2.2 : Affichage
     void print_DataFrame(COLUMN** DataFrame, int nombreColonne) : Affiche l'ensemble du DataFrame.
     void print_DataFrameLimitLine(COLUMN** DataFrame, int nombreColonne, int LigneLimite) : Affiche les lignes du DataFrame jusqu'à une certaine limite.
     void print_DataFrameLimitColumn(COLUMN** DataFrame, int nombreColonne, int ColonneLimite) : Affiche les colonnes du DataFrame jusqu'à une certaine limite.
+
 
 2.3 : Opérations usuelles
     void fill_DataFrameLine(COLUMN** DataFrame, int nombreColonne) : Ajoute une ligne dans une colonne du DataFrame.
@@ -61,6 +57,7 @@ Partie II : DataFrame
     int Research_Value(COLUMN** DataFrame, int nombreColonne, int x) : Recherche une valeur dans le DataFrame.
     void ReplaceValue(COLUMN** DataFrame, int nombreColonne) : Remplace une valeur dans le DataFrame.
     void printName(COLUMN** DataFrame, int nombreColonne) : Affiche les titres des colonnes du DataFrame.
+
 
 2.4 : Analyses & Statistiques
     int numberLines_DataFrame(COLUMN** DataFrame, int nombreColonne) : Retourne le nombre de lignes dans le DataFrame.

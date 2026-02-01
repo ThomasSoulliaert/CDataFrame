@@ -1,10 +1,4 @@
-//
-// Created by SOULLIAERT & YE on 29/03/2024.
-//
-
-
 #include "fonctions.h"
-
 
 // Partie I : Colonne
 // Fonction qui créé dynamiquement une colonne vide à partir d’un titre.

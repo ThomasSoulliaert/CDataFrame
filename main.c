@@ -1,8 +1,3 @@
-//
-// Created by SOULLIAERT & YE on 29/03/2024.
-//
-
-
 #include <stdio.h>
 #include "fonctions.h"
 
